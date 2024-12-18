@@ -23,7 +23,7 @@ type Circle = {
 const radius = 18;
 
 const GameZone: FC = () => {
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<number | null>(null);
 
   const [pointCount, setPointCount] = useState('');
   const [time, setTime] = useState<number>(-1);
