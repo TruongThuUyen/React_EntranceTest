@@ -1,9 +1,9 @@
-import HomePage from './page/HomePage';
+import GameZone from './page/GameZone';
 
 function App() {
   return (
     <>
-      <HomePage />
+      <GameZone />
     </>
   );
 }

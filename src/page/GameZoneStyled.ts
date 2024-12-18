@@ -6,7 +6,9 @@ export const GameContainer = styled.div`
   padding: 60px 0;
 `;
 
-export const TitleStyled = styled.h3`
+export const TitleStyled = styled.h3<{ isCountDone: number }>`
+  color: ${(props) => props.isCountDone === 1 && 'green'};
+  font-weight: 500;
   text-transform: uppercase;
   margin: 10px 0;
 `;
@@ -65,28 +67,44 @@ export const GameListItemStyled = styled.ul`
   overflow: 'hidden';
 `;
 
-export const TargetCircleStyled = styled.li<{ x: number; y: number; radius: number }>`
+export const ScoreDisplayStyled = styled.span<{ display: string }>`
+  display: flex;
+  opacity: ${(props) => (props.display === 'visible' ? 1 : 0)};
+  visibility: ${(props) => props.display};
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  margin: 10px 0;
+  p {
+    margin: 0 0 0 6px;
+  }
+`;
+
+export const TargetCircleStyled = styled.li<{
+  x: number;
+  y: number;
+  radius: number;
+  isselected: boolean;
+  hasError: boolean;
+}>`
   position: absolute;
   left: ${(props) => props.x + 'px'};
   top: ${(props) => props.y + 'px'};
   width: ${(props) => props.radius * 2 + 'px'};
   height: ${(props) => props.radius * 2 + 'px'};
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 1px solid #000;
   border-radius: 50%;
   list-style-type: none;
+  background-color: ${(props) => props.isselected && 'orange'};
+  font-size: 12px;
+  transition: ${(props) => (props.hasError ? 'none' : 'opacity 1.5s ease')};
+  opacity: ${(props) => (props.isselected ? 0 : 1)};
   &:hover {
     cursor: pointer;
   }
-`;
-
-export const ScoreDisplayStyled = styled.span<{ display?: boolean }>`
-  display: flex;
-  visibility: ${(props) => !props.display && 'hidden'};
-  margin: 10px 0;
   p {
-    margin: 0 0 0 6px;
+    margin: 0;
   }
 `;
